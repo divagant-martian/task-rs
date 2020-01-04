@@ -121,17 +121,40 @@ impl Status {
     }
 }
 
+impl Default for Task {
+    /// Task () = default;
+    // NOTE in the cpp version this (i think) has recalc_urgency = false due
+    // to being simply.. defaults
+    fn default() -> Self {
+        Task {
+            data: HashMap::new(),
+            id: 0,
+            urgency_value: 0.0,
+            recalc_urgency: true,
+            is_blocked: false,
+            is_blocking: false,
+            annotation_count: 0,
+        }
+    }
+}
 impl Task {
     /// Task (const std::string&);
-    pub fn from_string(rep: &str) -> Self {
-        todo!()
+    // TODO check https://doc.rust-lang.org/std/convert/trait.From.html
+    // (must be infalible)
+    pub fn from_string(input: &str) -> Self {
+        let mut task: Task = Default::default();
+        task.parse(input);
+        task
     }
 
     /// Task (const json::object*);
-    pub fn from_json(rep: &str) -> Self {
+    pub fn from_json(obj: &str) -> Self {
         // TODO this is supposed to receive a "json::object*". check if can be
         // made with serialization
-        todo!()
+        // TODO check https://doc.rust-lang.org/std/convert/trait.From.html
+        let mut task: Task = Default::default();
+        task.parse_json(obj);
+        task
     }
 
     /// void parse (const std::string&);
@@ -528,19 +551,5 @@ impl PartialEq for Task {
             }
         }
         true
-    }
-}
-impl Default for Task {
-    /// Task () = default;
-    fn default() -> Self {
-        Task {
-            data: HashMap::new(),
-            id: 0,
-            urgency_value: 0.0,
-            recalc_urgency: true,
-            is_blocked: false,
-            is_blocking: false,
-            annotation_count: 0,
-        }
     }
 }
