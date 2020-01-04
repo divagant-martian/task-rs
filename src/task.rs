@@ -1,43 +1,67 @@
 use std::collections::HashMap;
 
 /// static std::string defaultProject;
-// static default_project: String;
+static default_project: &str = "";
+
 /// static std::string defaultDue
-// static default_due: String,
+static default_due: &str = "";
+
 /// static std::string defaultScheduled;
-// static default_scheduled: String,
+static default_scheduled: &str = "";
+
 /// static bool searchCaseSensitive;
-// static search_case_sensitive: bool,
+static search_case_sensitive: bool = true;
+
 /// static bool regex;
-// static regex: bool,
+static regex: bool = false;
+
 /// static std::map <std::string, std::string> attributes;  // name -> type
+// TODO this is suposed to be a hashmap literal. Find alternative
 // static attributes: HashMap<String, String>, // name -> type
+
 /// static std::map <std::string, float> coefficients;
+// TODO this is suposed to be a hashmap literal. Find alternative
 // static coefficients: HashMap<String, f32>,
+
 /// static std::map <std::string, std::vector <std::string>> customOrder;
+// TODO this is suposed to be a hashmap literal. Find alternative
 // static custom_order: HashMap<String, Vec<String>>,
+
 /// static float urgencyProjectCoefficient;
-// static urgency_project_coefficient: f32,
+pub static urgency_project_coefficient: f32 = 0.0;
+
 /// static float urgencyActiveCoefficient;
-// static urgency_active_coefficient: f32,
+pub static urgency_active_coefficient: f32 = 0.0;
+
 /// static float urgencyScheduledCoefficient;
-// static urgency_scheduled_coefficient: f32,
+pub static urgency_scheduled_coefficient: f32 = 0.0;
+
 /// static float urgencyWaitingCoefficient;
-// static urgency_waiting_coefficient: f32,
+pub static urgency_waiting_coefficient: f32 = 0.0;
+
 /// static float urgencyBlockedCoefficient;
-// static urgency_blocked_coefficient: f32,
+pub static urgency_blocked_coefficient: f32 = 0.0;
+
 /// static float urgencyAnnotationsCoefficient;
-// static urgency_annotations_coefficient: f32,
+pub static urgency_annotations_coefficient: f32 = 0.0;
+
 /// static float urgencyTagsCoefficient;
-// static urgency_tags_coefficient: f32,
+pub static urgency_tags_coefficient: f32 = 0.0;
+
 /// static float urgencyDueCoefficient;
-// static urgency_due_coefficient: f32,
+pub static urgency_due_coefficient: f32 = 0.0;
+
 /// static float urgencyBlockingCoefficient;
-// static urgency_blocking_coefficient: f32,
+pub static urgency_blocking_coefficient: f32 = 0.0;
+
 /// static float urgencyAgeCoefficient;
-// static urgency_age_coefficient: f32,
+pub static urgency_age_coefficient: f32 = 0.0;
+
 /// static float urgencyAgeMax;
-// static urgency_age_max: f32;
+pub static urgency_age_max: f32 = 0.0;
+
+/// static const std::string dummy ("");
+const dummy: &str = "";
 
 pub struct Task {
     /// std::map <std::string, std::string> data {};
@@ -484,7 +508,25 @@ impl Task {
 
 impl PartialEq for Task {
     /// bool operator== (const Task&);
+    /// tasks are equal if they are a bijection without ids and uuids
     fn eq(&self, other: &Task) -> bool {
-        todo!()
+        if self.data.len() != other.data.len() {
+            return false;
+        }
+
+        for (k, v) in &self.data {
+            if k != "uuid" {
+                if let Some(v_other) = other.data.get(k) {
+                    if v != v_other {
+                        // attribute present, different value
+                        return false;
+                    }
+                } else {
+                    // missing attribute
+                    return false;
+                }
+            }
+        }
+        true
     }
 }
