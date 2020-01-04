@@ -1,5 +1,9 @@
 use std::collections::HashMap;
 
+pub type Id = i32;
+pub type UUID = String;
+pub type Urgency = f32;
+
 /// static std::string defaultProject;
 static default_project: &str = "";
 
@@ -28,37 +32,37 @@ static regex: bool = false;
 // static custom_order: HashMap<String, Vec<String>>,
 
 /// static float urgencyProjectCoefficient;
-pub static urgency_project_coefficient: f32 = 0.0;
+pub static urgency_project_coefficient: Urgency = 0.0;
 
 /// static float urgencyActiveCoefficient;
-pub static urgency_active_coefficient: f32 = 0.0;
+pub static urgency_active_coefficient: Urgency = 0.0;
 
 /// static float urgencyScheduledCoefficient;
-pub static urgency_scheduled_coefficient: f32 = 0.0;
+pub static urgency_scheduled_coefficient: Urgency = 0.0;
 
 /// static float urgencyWaitingCoefficient;
-pub static urgency_waiting_coefficient: f32 = 0.0;
+pub static urgency_waiting_coefficient: Urgency = 0.0;
 
 /// static float urgencyBlockedCoefficient;
-pub static urgency_blocked_coefficient: f32 = 0.0;
+pub static urgency_blocked_coefficient: Urgency = 0.0;
 
 /// static float urgencyAnnotationsCoefficient;
-pub static urgency_annotations_coefficient: f32 = 0.0;
+pub static urgency_annotations_coefficient: Urgency = 0.0;
 
 /// static float urgencyTagsCoefficient;
-pub static urgency_tags_coefficient: f32 = 0.0;
+pub static urgency_tags_coefficient: Urgency = 0.0;
 
 /// static float urgencyDueCoefficient;
-pub static urgency_due_coefficient: f32 = 0.0;
+pub static urgency_due_coefficient: Urgency = 0.0;
 
 /// static float urgencyBlockingCoefficient;
-pub static urgency_blocking_coefficient: f32 = 0.0;
+pub static urgency_blocking_coefficient: Urgency = 0.0;
 
 /// static float urgencyAgeCoefficient;
-pub static urgency_age_coefficient: f32 = 0.0;
+pub static urgency_age_coefficient: Urgency = 0.0;
 
 /// static float urgencyAgeMax;
-pub static urgency_age_max: f32 = 0.0;
+pub static urgency_age_max: Urgency = 0.0;
 
 /// static const std::string dummy ("");
 const dummy: &str = "";
@@ -67,9 +71,9 @@ pub struct Task {
     /// std::map <std::string, std::string> data {};
     data: HashMap<String, String>,
     /// int id                                   {0};
-    id: i32,
+    id: Id,
     /// float urgency_value                      {0.0};
-    urgency_value: f32,
+    urgency_value: Urgency,
     /// bool recalc_urgency                      {true};
     recalc_urgency: bool,
     /// bool is_blocked                          {false};
@@ -77,6 +81,7 @@ pub struct Task {
     /// bool is_blocking                         {false};
     is_blocking: bool,
     /// int annotation_count                     {0};
+    // TODO why not unsigned?
     annotation_count: i32,
 }
 
@@ -117,11 +122,6 @@ impl Status {
 }
 
 impl Task {
-    /// Task () = default;
-    pub fn new() -> Self {
-        todo!()
-    }
-
     /// Task (const std::string&);
     pub fn from_string(rep: &str) -> Self {
         todo!()
@@ -156,7 +156,7 @@ impl Task {
     }
 
     /// bool has (const std::string&) const;
-    pub fn has(&self, pubsmt: &str) -> bool {
+    pub fn has(&self, smt: &str) -> bool {
         todo!()
     }
 
@@ -353,27 +353,27 @@ impl Task {
     }
 
     /// void addDependency (const std::string&);
-    pub fn add_dependency_by_uuid(&mut self, smt: &str) {
+    pub fn add_dependency_by_uuid(&mut self, smt: &UUID) {
         todo!()
     }
 
     /// void removeDependency (int);
-    pub fn remove_dependency_by_id(&mut self, id: i32) {
+    pub fn remove_dependency_by_id(&mut self, id: Id) {
         todo!()
     }
 
     /// void removeDependency (const std::string&);
-    pub fn remove_dependency_by_uuid(&mut self, uuid: &str) {
+    pub fn remove_dependency_by_uuid(&mut self, uuid: &UUID) {
         todo!()
     }
 
     /// std::vector <int>         getDependencyIDs () const;
-    pub fn get_dependency_ids(&self) -> Vec<i32> {
+    pub fn get_dependency_ids(&self) -> Vec<Id> {
         todo!()
     }
 
     /// std::vector <std::string> getDependencyUUIDs () const;
-    pub fn get_dependency_uuids(&self) -> Vec<String> {
+    pub fn get_dependency_uuids(&self) -> Vec<UUID> {
         todo!()
     }
 
@@ -383,12 +383,12 @@ impl Task {
     }
 
     /// std::vector <std::string> getUDAOrphanUUIDs () const;
-    pub fn get_uda_orphan_uuids(&self) -> Vec<String> {
+    pub fn get_uda_orphan_uuids(&self) -> Vec<UUID> {
         todo!()
     }
 
     /// void substitute (const std::string&, const std::string&, const std::string&);
-    pub fn substitute(&mut self, smt0: &str, smt1: &str, smt2: &str) {
+    pub fn substitute(&mut self, from: &str, to: &str, flags: &str) {
         todo!()
     }
 
@@ -398,12 +398,12 @@ impl Task {
     }
 
     /// float urgency_c () const;
-    pub fn urgency_c(&self) -> i32 {
+    pub fn urgency_c(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency ();
-    pub fn urgency(&self) -> i32 {
+    pub fn urgency(&self) -> Urgency {
         todo!()
     }
 
@@ -451,57 +451,57 @@ impl Task {
     // now more public stuff
 
     /// float urgency_project     () const;
-    pub fn urgency_project(&self) -> i32 {
+    pub fn urgency_project(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_active      () const;
-    pub fn urgency_active(&self) -> i32 {
+    pub fn urgency_active(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_scheduled   () const;
-    pub fn urgency_scheduled(&self) -> i32 {
+    pub fn urgency_scheduled(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_waiting     () const;
-    pub fn urgency_waiting(&self) -> i32 {
+    pub fn urgency_waiting(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_blocked     () const;
-    pub fn urgency_blocked(&self) -> i32 {
+    pub fn urgency_blocked(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_inherit     () const;
-    pub fn urgency_inherit(&self) -> i32 {
+    pub fn urgency_inherit(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_annotations () const;
-    pub fn urgency_annotations(&self) -> i32 {
+    pub fn urgency_annotations(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_tags        () const;
-    pub fn urgency_tags(&self) -> i32 {
+    pub fn urgency_tags(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_due         () const;
-    pub fn urgency_due(&self) -> i32 {
+    pub fn urgency_due(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_blocking    () const;
-    pub fn urgency_blocking(&self) -> i32 {
+    pub fn urgency_blocking(&self) -> Urgency {
         todo!()
     }
 
     /// float urgency_age         () const;
-    pub fn urgency_age(&self) -> i32 {
+    pub fn urgency_age(&self) -> Urgency {
         todo!()
     }
 }
@@ -528,5 +528,19 @@ impl PartialEq for Task {
             }
         }
         true
+    }
+}
+impl Default for Task {
+    /// Task () = default;
+    fn default() -> Self {
+        Task {
+            data: HashMap::new(),
+            id: 0,
+            urgency_value: 0.0,
+            recalc_urgency: true,
+            is_blocked: false,
+            is_blocking: false,
+            annotation_count: 0,
+        }
     }
 }
