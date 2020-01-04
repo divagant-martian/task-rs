@@ -72,6 +72,13 @@ pub enum DateState {
     DateEarlierToday,
     DateBeforeToday,
 }
+/// enum modType {modReplace, modPrepend, modAppend, modAnnotate};
+pub enum ModType {
+    ModReplace,
+    ModPrepend,
+    ModAppend,
+    ModAnnotate,
+}
 
 impl Status {
     /// static status textToStatus (const std::string&);
@@ -316,18 +323,163 @@ impl Task {
         todo!()
     }
 
-    //     void addDependency (int);
-    //
-    // void addDependency (const std::string&);
-    // void removeDependency (int);
-    // void removeDependency (const std::string&);
-    // std::vector <int>         getDependencyIDs () const;
-    // std::vector <std::string> getDependencyUUIDs () const;
-    // std::vector <Task>        getDependencyTasks () const;
-    //
-    // std::vector <std::string> getUDAOrphanUUIDs () const;
-    //
-    // void substitute (const std::string&, const std::string&, const std::string&);
+    /// void addDependency (int);
+    pub fn add_dependency_by_id(&mut self, dep: i32) {
+        todo!()
+    }
+
+    /// void addDependency (const std::string&);
+    pub fn add_dependency_by_uuid(&mut self, smt: &str) {
+        todo!()
+    }
+
+    /// void removeDependency (int);
+    pub fn remove_dependency_by_id(&mut self, id: i32) {
+        todo!()
+    }
+
+    /// void removeDependency (const std::string&);
+    pub fn remove_dependency_by_uuid(&mut self, uuid: &str) {
+        todo!()
+    }
+
+    /// std::vector <int>         getDependencyIDs () const;
+    pub fn get_dependency_ids(&self) -> Vec<i32> {
+        todo!()
+    }
+
+    /// std::vector <std::string> getDependencyUUIDs () const;
+    pub fn get_dependency_uuids(&self) -> Vec<String> {
+        todo!()
+    }
+
+    /// std::vector <Task>        getDependencyTasks () const;
+    pub fn get_dependency_tasks(&self) -> Vec<Task> {
+        todo!()
+    }
+
+    /// std::vector <std::string> getUDAOrphanUUIDs () const;
+    pub fn get_uda_orphan_uuids(&self) -> Vec<String> {
+        todo!()
+    }
+
+    /// void substitute (const std::string&, const std::string&, const std::string&);
+    pub fn substitute(&mut self, smt0: &str, smt1: &str, smt2: &str) {
+        todo!()
+    }
+
+    /// void validate (bool applyDefault = true);
+    pub fn validate(&self, apply_default: bool) {
+        todo!()
+    }
+
+    /// float urgency_c () const;
+    pub fn urgency_c(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency ();
+    pub fn urgency(&self) -> i32 {
+        todo!()
+    }
+
+    /// void modify (modType, bool text_required = false);
+    pub fn modify(&mut self, mode: ModType, text_required: bool) {
+        todo!()
+    }
+
+    // private stuff
+
+    /// int determineVersion (const std::string&);
+    fn determine_version(&self, smt: &str) -> i32 {
+        todo!()
+    }
+
+    /// void parseJSON (const std::string&);
+    fn parse_json_string(&self, text: &str) {
+        todo!()
+    }
+
+    /// void parseJSON (const json::object*);
+    fn parse_json(&self, json: &str) {
+        // TODO this receives a json object
+        todo!()
+    }
+
+    /// void parseLegacy (const std::string&);
+    fn parse_legacy(text: &str) {
+        todo!()
+    }
+
+    /// void validate_before (const std::string&, const std::string&);
+    fn validate_before(&self, smt0: &str, smt1: &str) {}
+
+    /// const std::string encode (const std::string&) const;
+    fn encode(&self, text: &str) -> String {
+        todo!()
+    }
+
+    /// const std::string decode (const std::string&) const;
+    fn decode(text: &str) -> String {
+        todo!()
+    }
+
+    // now more public stuff
+
+    /// float urgency_project     () const;
+    pub fn urgency_project(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_active      () const;
+    pub fn urgency_active(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_scheduled   () const;
+    pub fn urgency_scheduled(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_waiting     () const;
+    pub fn urgency_waiting(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_blocked     () const;
+    pub fn urgency_blocked(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_inherit     () const;
+    pub fn urgency_inherit(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_annotations () const;
+    pub fn urgency_annotations(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_tags        () const;
+    pub fn urgency_tags(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_due         () const;
+    pub fn urgency_due(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_blocking    () const;
+    pub fn urgency_blocking(&self) -> i32 {
+        todo!()
+    }
+
+    /// float urgency_age         () const;
+    pub fn urgency_age(&self) -> i32 {
+        todo!()
+    }
 }
 
 impl PartialEq for Task {
